@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     # My applications
     'apiv1.apps.Apiv1Config',
     'shop.apps.ShopConfig',
-
 ]
 
 MIDDLEWARE = [
@@ -133,5 +132,5 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minute=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
 }
