@@ -33,14 +33,14 @@ const router = new VueRouter({
 /**
  *  画面遷移をする直前に毎回実行されるナビゲーションガード
  */
-router.beforeEach((to, from, next)) => {
+router.beforeEach((to, from, next) => {
   const isLoggedIn = store.state.auth.isLoggedIn;
   const token = localStorage.getItem("access");
   console.log("to.path", to.path);
   console.log("isLoggedIn=", isLoggedIn);
 
   // ログインが必要な画面に遷移しようとした場合
-  if (to.matched.some(record => record.meta.requireAuth)) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
     // ログインしていない場合
     if (!isLoggedIn) {
       console.log("User is not logged in.");
@@ -57,14 +57,16 @@ router.beforeEach((to, from, next)) => {
             .catch(() => {
               // 再取得できなければログイン画面へ
               forceToLoginPage(to);
-            })
+            });
       } else {
         // 証明用トークンが無い場合は、ログイン画面へ
-        foreceToLoginPage(to)
+        forceToLoginPage(to);
+        }
       } else {
-        // ログインしている場合はそのまま次へ
-        console.log("User is already logged in. So, free to next.");
-        next();
+      // ログインしている場合はそのまま次へ
+      console.log("User is already logged in. So, free to next.");
+      next();
+       }
       } else {
         // ログインが不要な画面であればそのまま次へ
         console.log("Go to public page.");
@@ -78,9 +80,9 @@ router.beforeEach((to, from, next)) => {
     function forceToLoginPage(to) {
       console.log("Force to login page.");
       router.replace({
-        path: "login",
+        path: "/login",
         // 遷移先のURLはクエリ文字列として付加
-        query: {next: to.fullpath}
+        query: {next: to.fullpath }
       });
 }
 
