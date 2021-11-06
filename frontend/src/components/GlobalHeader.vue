@@ -3,7 +3,7 @@
   <div id="header">
     <b-navbar type="dark" variant="dark">
       <a class="navbar-brand" href="/">DRF Sample</a>
-      <b-navbar-nav class="ml-auto" v-if="$route.meta.requireAuth">
+      <b-navbar-nav class="ml-auto" v-if="$route.meta.requiresAuth">
         <b-nav-item-dropdown right v-if="isLoggedIn">
           <template v-slot:button-content>{{ username }}</template>
           <b-dropdown-item href="#" v-on:click="clickLogout">
@@ -32,7 +32,9 @@ export default {
     // ログアウトリンク押下
     clickLogout: function() {
       this.$store.dispatch("auth/logout");
-      this.$store.dispatch("message/setInfoMessage", {});
+      this.$store.dispatch("message/setInfoMessage", {
+        message: "ログアウトしました。"
+      });
       this.$router.replace("/login");
     },
     // ログインリンク押下

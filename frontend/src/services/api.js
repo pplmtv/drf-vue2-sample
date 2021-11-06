@@ -42,10 +42,10 @@ api.interceptors.response.use(
         if (status === 400) {
             // バリデーションNG
             const messages = [].concat.apply([], Object.values(error.response.data));
-            store.dispatch("message/setWarningMessages", {messages: messages });
+            store.dispatch("message/setWarningMessages", { messages: messages });
         } else if (status === 401) {
             // 認証エラー
-            const token = loacalStorage.getItem("access");
+            const token = localStorage.getItem("access");
             if (token != null) {
                 message = "ログイン有効期限切れ"
             } else {

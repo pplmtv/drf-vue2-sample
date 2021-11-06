@@ -11,8 +11,8 @@ const routes = [
   {
     path: "/",
     component: HomePage,
-    // ログインが必要な画面には「requireAuth」フラグを付けておく
-    meta: { requireAuth: true }
+    // ログインが必要な画面には「requiresAuth」フラグを付けておく
+    meta: { requiresAuth: true }
   },
   {
     path: "/login",
@@ -66,11 +66,11 @@ router.beforeEach((to, from, next) => {
       // ログインしている場合はそのまま次へ
       console.log("User is already logged in. So, free to next.");
       next();
-       }
-      } else {
-        // ログインが不要な画面であればそのまま次へ
-        console.log("Go to public page.");
-        next();
+      }
+    } else {
+      // ログインが不要な画面であればそのまま次へ
+      console.log("Go to public page.");
+      next();
       }
     });
 
@@ -79,11 +79,11 @@ router.beforeEach((to, from, next) => {
      */
     function forceToLoginPage(to) {
       console.log("Force to login page.");
-      router.replace({
+      router.replace( {
         path: "/login",
         // 遷移先のURLはクエリ文字列として付加
-        query: {next: to.fullpath }
+        query: { next: to.fullPath }
       });
-}
+  }
 
 export default router;

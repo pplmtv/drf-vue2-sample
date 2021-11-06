@@ -15,10 +15,10 @@
         </div>
         <div class="row form-group">
           <label class="col-sm-3 col-form-label">パスワード</label>
-            <div class="col-sm-8">
+          <div class="col-sm-8">
               <b-input type="password" v-model="form.password" required />
-            </div>
           </div>
+        </div>
         <div class="row text-center mt-5">
           <div class="col-sm-12">
             <b-button type="submit" variant="primary">ログイン</b-button>
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import GlobalHeader from "@/components/GlobalHeader.vue";
-import GlobalMessage from "@/components/GlobalMessage.vue";
+import GlobalHeader from "@ /components/GlobalHeader.vue";
+import GlobalMessage from "@ /components/GlobalMessage.vue";
 
 export default {
   components: {
@@ -69,7 +69,7 @@ export default {
         });
         // クエリ文字列に「next」がなければ、ホーム画面へ
         const next = this.$route.query.next || "/";
-        this.$router.replace(next);
+        this.$router.replace("next");
       });
     }
   }
