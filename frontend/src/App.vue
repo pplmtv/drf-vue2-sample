@@ -14,6 +14,6 @@
 
 main.container {
   border: 1px solid #CCCCCC;
-  width: 60px;
+  width: 600px;
 }
 </style>
