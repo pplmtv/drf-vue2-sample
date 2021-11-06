@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import GlobalHeader from "@ /components/GlobalHeader.vue";
-import GlobalMessage from "@ /components/GlobalMessage.vue";
+import GlobalHeader from "@/components/GlobalHeader.vue";
+import GlobalMessage from "@/components/GlobalMessage.vue";
 
 export default {
   components: {
@@ -69,7 +69,7 @@ export default {
         });
         // クエリ文字列に「next」がなければ、ホーム画面へ
         const next = this.$route.query.next || "/";
-        this.$router.replace("next");
+        this.$router.replace(next);
       });
     }
   }
