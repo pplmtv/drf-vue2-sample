@@ -1,4 +1,5 @@
 import Vue from "vue";
+// Vue.config.devtools = true
 
 //BootstrapVue
 import BootstrapVue from "bootstrap-vue";
