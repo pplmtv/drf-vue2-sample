@@ -8,7 +8,7 @@
       <p class="h5 mb-5">ホーム</p>
       <b-form v-on:submit.prevent="submitSave">
         <div class="row form-group">
-          <label class="col-sm3 col-form-label">タイトル</label>
+          <label class="col-sm-3 col-form-label">タイトル</label>
           <div class="col-sm-8">
             <b-input
               type="text"
