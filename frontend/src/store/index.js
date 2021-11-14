@@ -27,7 +27,7 @@ const authModule = {
          */
         login(context, payload) {
             return api
-                .post("/auth/jwt/create/", {
+                .post("/api/v1/auth/jwt/create/", {
                     username: payload.username,
                     password: payload.password
                 })
@@ -51,7 +51,7 @@ const authModule = {
          *  ユーザー情報更新
          */
         renew(context) {
-            return api.get("/auth/users/me/").then(response => {
+            return api.get("/api/v1/auth/users/me/").then(response => {
                 const user = response.data;
                 // storeのユーザー情報を更新
                 context.commit("set", { user: user });
