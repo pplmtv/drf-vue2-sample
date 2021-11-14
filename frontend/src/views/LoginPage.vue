@@ -57,6 +57,7 @@ export default {
     // ログインボタン押下
     submitLogin: function() {
       // ログイン実行
+      console.log("Login execute.");
       this.$store
       .dispatch("auth/login", {
         username: this.form.username,
