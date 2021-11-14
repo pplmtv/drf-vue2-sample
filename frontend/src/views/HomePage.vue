@@ -75,6 +75,7 @@ export default {
     // 登録・更新ボタン押下
     submitSave: function() {
       // 本の登録・更新を実行
+      console.log("create or update.");
       api({
         // 登録済みかどうかでHTTPメソッドとエンドポイントを切り替える
         method: this.isCreated ? "put" : "post",
