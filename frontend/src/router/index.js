@@ -36,11 +36,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const isLoggedIn = store.state.auth.isLoggedIn;
   const token = localStorage.getItem("access");
-  console.log("to.path", to.path);
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   console.log("isLoggedIn=", isLoggedIn);
 
   // ログインが必要な画面に遷移しようとした場合
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (requiresAuth) {
     // ログインしていない場合
     if (!isLoggedIn) {
       console.log("User is not logged in.");
