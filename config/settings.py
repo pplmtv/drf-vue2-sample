@@ -45,9 +45,13 @@ INSTALLED_APPS = [
     # My applications
     'apiv1.apps.Apiv1Config',
     'shop.apps.ShopConfig',
+
+    # debug
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,5 +147,15 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://127.0.0.1:8080',
-    'http://127.0.0.1:8000',
 ]
+
+# debug
+DEBUG = True
+
+# debug_toolbar
+INTERNAL_IPS = ['127.0.0.1']
+
+# debug_toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+}
