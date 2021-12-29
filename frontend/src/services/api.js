@@ -3,6 +3,7 @@ import store from "@/store";
 
 const api = axios.create({
     baseURL: process.env.VUE_APP_ROOT_API,
+    // baseURL: "http://127.0.0.1:8000/api/v1/",
     timeout: 5000,
     headers: {
         "Content-Type": "application/json",
@@ -14,9 +15,12 @@ const api = axios.create({
 api.interceptors.request.use(
     config => {
         // メッセージをクリア
+        console.log("message clear.");
+        console.log("process.env.VUE_APP_ROOT_API",process.env.VUE_APP_ROOT_API);
         store.dispatch("message/clearMessages");
         // 認証用トークンがあればリクエストヘッダに加える
         const token = localStorage.getItem("access");
+        // console.log("token",localStorage.getItem("access"));
         if (token) {
             config.headers.Authorization = "JWT " + token;
             return config;
@@ -31,6 +35,9 @@ api.interceptors.request.use(
 // 共通エラー処理
 api.interceptors.response.use(
     response => {
+        console.log("DEBUG api.interceptors.response.use");
+        console.log("status:",response.status);
+        // console.log("data:",response.data);
         return response;
     },
     error => {

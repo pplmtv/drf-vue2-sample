@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, RedirectView
 
 from django.conf import settings
 import debug_toolbar
+import logging
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,3 +17,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns = [path('__debug__/', include(debug_toolbar.urls)), ] + urlpatterns
+
+    logger = logging.getLogger(__name__)
+    logger.info('config urls')

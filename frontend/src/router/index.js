@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
             .dispatch("auth/renew")
             .then(() => {
               // 再取得できたらそのまま次へ
+              // console.log("token",localStorage.getItem("access"));
               console.log("Succeeded to renew. So, free to next.");
               next();
             })

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from datetime import timedelta
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -159,3 +160,128 @@ INTERNAL_IPS = ['127.0.0.1']
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: True,
 }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'development': {
+            'format': '[{name}] {asctime} [{levelname}] {pathname}:{lineno:d} '
+                      '{message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'development',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'shop': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagete': False,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagete': False,
+        },
+    },
+}
+
+# # For debugging
+# if DEBUG:
+#     # will output to your console
+#     logging.basicConfig(
+#         level = logging.DEBUG,
+#         format = '%(asctime)s %(levelname)s %(message)s',
+#     )
+# else:
+#     # will output to logging file
+#     logging.basicConfig(
+#         level = logging.DEBUG,
+#         format = '%(asctime)s %(levelname)s %(message)s',
+#         filename = '/my_log_file.log',
+#         filemode = 'a'
+#     )
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'require_debug_false': {
+#             '()': 'django.utils.log.RequireDebugFalse',
+#         },
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     'formatters': {
+#         'django.server': {
+#             '()': 'django.utils.log.ServerFormatter',
+#             'format': '[{server_time}] {message}',
+#             'style': '{',
+#         }
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': '/Users/yamazakiyuu/PythonProjects/drf-vue2-sample/log/app.log',
+#             'formatter': 'verbose',
+#             # 'formatter': 'production',
+#             # 'maxBytes': 1024 * 1024 * 1,
+#             # 'backupCount': 5,
+#         },
+#         'console': {
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#         },
+#         'django.server': {
+#             'level': 'INFO',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'django.server',
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         }
+#     },
+#     'loggers': {
+#         # 自分で追加したアプリケーション全般のログを拾うロガー
+#         '': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': False,
+#         },
+#         # Django自身が出力するログ全般を拾うロガー
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': False,
+#         },
+#         # 'django': {
+#         #     'handlers': ['console', 'mail_admins'],
+#         #     'level': 'INFO',
+#         # },
+#         'django.server': {
+#             'handlers': ['django.server'],
+#             'level': 'INFO',
+#             'propagate': False,
+#         },
+#     }
+# }

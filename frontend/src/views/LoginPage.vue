@@ -65,6 +65,7 @@ export default {
       })
       .then(() => {
         console.log("Login succeeded.");
+        // console.log("token",localStorage.getItem("access"));
         this.$store.dispatch("message/setInfoMessage", {
           message: "ログインしました。"
         });

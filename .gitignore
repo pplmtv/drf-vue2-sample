@@ -128,5 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-settings.py
+# macOS + PyCharm
+.DS_Store
+.idea/
+
+# app
+static
 templates/index.html
+log
