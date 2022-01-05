@@ -13,15 +13,19 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 from datetime import timedelta
 import logging
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd8efpv&f#fbrjrpy)lz$y1^jwi$&bed_aqagnu1gis$b52!(5!'
+SECRET_KEY = env.get_value('SECRET_KEY', str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,10 +91,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db()
 }
 
 # Password validation
@@ -145,16 +146,10 @@ SIMPLE_JWT = {
 # CORS
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8080',
-    'http://127.0.0.1:8080',
-]
-
-# debug
-DEBUG = True
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS')
 
 # debug_toolbar
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = env.list('INTERNAL_IPS')
 
 # debug_toolbar
 DEBUG_TOOLBAR_CONFIG = {
@@ -200,88 +195,3 @@ LOGGING = {
         },
     },
 }
-
-# # For debugging
-# if DEBUG:
-#     # will output to your console
-#     logging.basicConfig(
-#         level = logging.DEBUG,
-#         format = '%(asctime)s %(levelname)s %(message)s',
-#     )
-# else:
-#     # will output to logging file
-#     logging.basicConfig(
-#         level = logging.DEBUG,
-#         format = '%(asctime)s %(levelname)s %(message)s',
-#         filename = '/my_log_file.log',
-#         filemode = 'a'
-#     )
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#         'require_debug_false': {
-#             '()': 'django.utils.log.RequireDebugFalse',
-#         },
-#         'require_debug_true': {
-#             '()': 'django.utils.log.RequireDebugTrue',
-#         },
-#     },
-#     'formatters': {
-#         'django.server': {
-#             '()': 'django.utils.log.ServerFormatter',
-#             'format': '[{server_time}] {message}',
-#             'style': '{',
-#         }
-#     },
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': '/Users/yamazakiyuu/PythonProjects/drf-vue2-sample/log/app.log',
-#             'formatter': 'verbose',
-#             # 'formatter': 'production',
-#             # 'maxBytes': 1024 * 1024 * 1,
-#             # 'backupCount': 5,
-#         },
-#         'console': {
-#             'level': 'INFO',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.StreamHandler',
-#         },
-#         'django.server': {
-#             'level': 'INFO',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'django.server',
-#         },
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         }
-#     },
-#     'loggers': {
-#         # 自分で追加したアプリケーション全般のログを拾うロガー
-#         '': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#         # Django自身が出力するログ全般を拾うロガー
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#         # 'django': {
-#         #     'handlers': ['console', 'mail_admins'],
-#         #     'level': 'INFO',
-#         # },
-#         'django.server': {
-#             'handlers': ['django.server'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#     }
-# }
