@@ -132,8 +132,3 @@ dmypy.json
 # macOS + PyCharm
 .DS_Store
 .idea/
-
-# app
-static
-templates/*
-log
